@@ -538,7 +538,7 @@ class LogSubject extends React.Component {
                     </SubSection>}
                     <SubSection>
                         {(platform === 'phone') ? null :
-                        <Button sef={this.props.subject.drag_button_ref} style={{ cursor: 'grab' }}>
+                        <Button sef={this.props.drag_button_ref} style={{ cursor: 'grab' }}>
                             🖐🏻
                         </Button>}
                         <Button
@@ -554,6 +554,7 @@ class LogSubject extends React.Component {
     }
 }
 
+const subject_refs = {}
 export class AttendanceLog extends React.Component {
     constructor(props) {
         super(props)
@@ -613,7 +614,6 @@ export class AttendanceLog extends React.Component {
                 total: 100,
                 color: random_color,
                 key: new_key,
-                drag_button_ref: React.createRef()
             }
             const new_bar = {
                 name: 'name',
@@ -652,12 +652,14 @@ export class AttendanceLog extends React.Component {
                     </Section>
                     {!log.subjects.length ? 'add a subject!' :
                         log.subjects.map((value, i) => {
+                            const subject_ref = subject_refs[value.key] ? subject_refs[value.key] : React.createRef()
+                            subject_refs[value.key] = subject_ref
                             return (
                                 <DraggableItem
                                     className='log-subject-sub-container'
                                     key={value.key}
                                     index={i}
-                                    drag_ref={value.drag_button_ref}
+                                    drag_ref={subject_ref}
                                     item_type="SUBJECT"
                                     item_key={value.key}
                                     drop_hover={(item) => {
@@ -671,6 +673,7 @@ export class AttendanceLog extends React.Component {
                                 >
                                     <LogSubject
                                         subject={value}
+                                        drag_button_ref={subject_ref}
                                         index={i}
                                         is_last={i === log.subjects.length - 1}
                                         onRearrange={(direction) => {
@@ -707,7 +710,8 @@ export class AttendanceLog extends React.Component {
                         </SubSection>
                         <SubSection>
                             <Button onClick={() => {
-                                this.props.onSave(this.props.index, log)
+                                console.log(log)
+                                this.props.onSave(this.props.index,  this.state.log)
                                 this.setState({ key: this.state.key + 1 })
                             }}>Save 💼</Button>
                             <Button onClick={() => this.props.onCross(this.props.index)}>✖</Button>
