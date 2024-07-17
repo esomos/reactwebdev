@@ -74,7 +74,6 @@ class Component extends React.Component {
                                             logs[index] = log
                                             localStorage.setItem('logs', JSON.stringify(logs))
                                             this.setState({ log: logs })
-                                            
                                         }}
                                         onCross={(index) => {
                                             let logs = JSON.parse(localStorage.getItem('logs'))

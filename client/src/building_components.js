@@ -554,7 +554,6 @@ class LogSubject extends React.Component {
     }
 }
 
-const subject_refs = {}
 export class AttendanceLog extends React.Component {
     constructor(props) {
         super(props)
@@ -562,6 +561,7 @@ export class AttendanceLog extends React.Component {
             log: props.log,
             key: 0
         }
+        this.subject_refs = {}
     }
 
     key_gen() {
@@ -652,15 +652,15 @@ export class AttendanceLog extends React.Component {
                     </Section>
                     {!log.subjects.length ? 'add a subject!' :
                         log.subjects.map((value, i) => {
-                            const subject_ref = subject_refs[value.key] ? subject_refs[value.key] : React.createRef()
-                            subject_refs[value.key] = subject_ref
+                            const subject_ref = this.subject_refs[value.key] ? this.subject_refs[value.key] : React.createRef()
+                            this.subject_refs[value.key] = subject_ref
                             return (
                                 <DraggableItem
                                     className='log-subject-sub-container'
                                     key={value.key}
                                     index={i}
                                     drag_ref={subject_ref}
-                                    item_type="SUBJECT"
+                                    item_type={`SUBJECT-${log.key}`}
                                     item_key={value.key}
                                     drop_hover={(item) => {
                                         if (item.item_key !== value.key) {
@@ -710,7 +710,6 @@ export class AttendanceLog extends React.Component {
                         </SubSection>
                         <SubSection>
                             <Button onClick={() => {
-                                console.log(log)
                                 this.props.onSave(this.props.index,  this.state.log)
                                 this.setState({ key: this.state.key + 1 })
                             }}>Save 💼</Button>
