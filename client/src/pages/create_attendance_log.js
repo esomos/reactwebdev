@@ -1,7 +1,13 @@
 import React from "react"
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
-import { Container, AttendanceLog, Button, SmoothAddContainer, DraggableItem, array_shift_entry } from "../building_components"
+import { 
+    Container,
+    Button,
+    SmoothAddContainer,
+    array_shift_entry
+} from "../esomos_ui_kit/index.js"
+import { AttendanceLog } from "../building_components"
 
 class Component extends React.Component {
     constructor(props) {
