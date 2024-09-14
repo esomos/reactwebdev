@@ -41,7 +41,7 @@ class Component extends React.Component {
         return (
             <DndProvider backend={HTML5Backend}>
                 <div style={{ textAlign: 'center' }}>
-                    <Container style={{ alignContent: 'center', fontSize: 'xx-large' }}>
+                    <Container style={{fontSize: 'xx-large', alignContent: 'center'}}>
                         <Button
                             style={{ boxSizing: 'border-box', width: '50%' }}
                             onClick={() => {

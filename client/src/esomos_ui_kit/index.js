@@ -2,11 +2,11 @@ import React, { useState, useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 
 import "./index.css"
-import { Link } from "react-router-dom"
+import { Link, BrowserRouter as Router, Route, Routes } from "react-router-dom"
 
 // helper constants
 const os = getOS()
-export const platform = (os === 'Android' || os === 'iOS')? 'phone' : 'pc'
+export const platform = (os === 'Android' || os === 'iOS') ? 'phone' : 'pc'
 
 // helper methods
 export function get_element_pos(element, ancker) {
@@ -495,7 +495,7 @@ export class Button extends React.Component {
 }
 
 export class RearrangeButton extends React.Component {
-    render(){
+    render() {
         return (
             <>
                 <Button onClick={() => this.props.onRearrange(-1)}>
@@ -592,3 +592,25 @@ export const DraggableItem = ({ index, children, className, drop_hover, onDrop, 
         </div>
     )
 }
+
+export const Navbar = ({ navData }) => {
+    return (
+        <Router>
+            <div className='nav-bar'>
+                {navData.map((groups) => 
+                    <SubSection>
+                        {groups.map((group) => <ButtonLink to={group.link}>{group.name}</ButtonLink>)}
+                    </SubSection>
+                )}
+            </div>
+            {navData.map( (groups) => 
+                <Routes>
+                    {groups.map((group) => <Route path={group.link} element={group.component} />)}
+                </Routes>
+            )}
+        </Router>
+    )
+}
+
+
+

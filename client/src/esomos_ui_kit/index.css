@@ -242,10 +242,32 @@ input[type=color]:hover{
     height: 100%;
 }
 
+/* nav-bar complex */
+.nav-bar{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 5px;
+    column-gap: 5px;
+    padding: 10px;
+    font-size: x-large;
+    box-shadow: var(--shadow);
+    color: white;
+
+    position: sticky;
+    top: 0px;
+    z-index: 2;
+    background-color: var(--shade-1);
+
+    justify-content: space-evenly;
+
+}
+
 /* webkit */
 ::-webkit-scrollbar{
     display: none;
 }
+
 
 /* animations */
 @keyframes fade-in {
