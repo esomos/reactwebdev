@@ -611,6 +611,3 @@ export const Navbar = ({ navData }) => {
         </Router>
     )
 }
-
-
-
